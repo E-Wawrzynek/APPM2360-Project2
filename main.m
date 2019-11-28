@@ -123,3 +123,4 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
 
 %% 4
 
+%% 5
