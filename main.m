@@ -124,3 +124,64 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
 %% 4
 
 %% 5
+
+% (b)
+Pim = 1;
+
+transition_SEIR_Im = [Ps, Pe, 0, (1/2)*(1-Pr), 0;
+                   1-Ps, 0, 0, 0, 0;
+                   0, 1/2*(1-Pe), (1-Pi), 0, 0;
+                   0, 1/2*(1-Pe), Pi, Pr, 0;
+                   0, 0, 0, (1/2)*(1-Pr), Pim];
+               
+fprintf('\n\n');
+fprintf('The transistion matrix for the Markov Chain of the SEIR-Im model:\n\n'); disp(transition_SEIR_Im); 
+
+% (c)
+%% 1
+
+%(a)
+susceptible_new = [1; 0; 0; 0; 0];
+days_3 = 1:1:250;
+prob_day_3 = zeros(5, 1);
+prob_s_3 = zeros(1, 250);
+prob_e_3 = zeros(1, 250);
+prob_i_3 = zeros(1, 250);
+prob_r_3 = zeros(1, 250);
+prob_im = zeros(1, 250);
+
+
+for n = 1:250
+    prob_day_3 = (transition_SEIR_Im ^ n) * susceptible_new;
+    prob_day_3 = prob_day_3 / sum(prob_day_3);
+    
+    prob_s_3(n) = prob_day_3(1);
+    prob_e_3(n) = prob_day_3(2);
+    prob_i_3(n) = prob_day_3(3);
+    prob_r_3(n) = prob_day_3(4);
+    prob_im(n) = prob_day_3(5);
+end
+
+figure(4);
+plot(days_3, 100*prob_s_3, '-g');
+hold on
+plot(days_3, 100*prob_e_3, '-r');
+plot(days_3, 100*prob_i_3, '-m');
+plot(days_3, 100*prob_r_3, '-b');
+plot(days_3, 100*prob_im, '-c');
+legend('susceptible', 'exposed', 'infected', 'recovered', 'immune');
+title('The Probability of being in a SEIR-Im state on each day');
+xlabel('Days (1-250)');
+%xlim([1, 250]);
+ylabel('Probability');
+    
+% (b)
+stat_dist_3 = zeros(5, 1);
+stat_dist_3(1) = prob_s_3(250);
+stat_dist_3(2) = prob_e_3(250);
+stat_dist_3(3) = prob_i_3(250);
+stat_dist_3(4) = prob_r_3(250);
+stat_dist_3(5) = prob_im(250);
+
+fprintf('\n\n');
+fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);

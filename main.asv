@@ -55,6 +55,7 @@ for n = 1:31
     prob_r(n) = prob_day(4);
 end
 
+figure(1);
 plot(days, 100*prob_s, '-g');
 hold on
 plot(days, 100*prob_e, '-r');
@@ -93,16 +94,79 @@ for n = 1:31
     prob_day_2 = prob_day_2 / sum(prob_day_2);
     
     prob_s_2(n) = prob_day_2(1);
-    prob_e_2(n) = prob_day_(2);
-    prob_i_2(n) = prob_day(3);
-    prob_r_2(n) = prob_day(4);
+    prob_e_2(n) = prob_day_2(2);
+    prob_i_2(n) = prob_day_2(3);
+    prob_r_2(n) = prob_day_2(4);
 end
 
-plot(days, 100*prob_s, '-g');
+figure(2);
+plot(days, 100*prob_s_2, '-g');
 hold on
-plot(days, 100*prob_e, '-r');
-plot(days, 100*prob_i, '-m');
-plot(days, 100*prob_r, '-b');
+plot(days, 100*prob_e_2, '-r');
+plot(days, 100*prob_i_2, '-m');
+plot(days, 100*prob_r_2, '-b');
+legend('susceptible', 'exposed', 'infected', 'recovered');
+title('The Probability of being in a SEIR state on each day');
+xlabel('Days (1-31)');
+xlim([1, 31]);
+ylabel('Probability');
+    
+% (b)
+stat_dist_2 = zeros(4, 1);
+stat_dist_2(1) = prob_s_2(31);
+stat_dist_2(2) = prob_e_2(31);
+stat_dist_2(3) = prob_i_2(31);
+stat_dist_2(4) = prob_r_2(31);
+
+fprintf('\n\n');
+fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
+
+%% 4
+
+%% 5
+
+% (b)
+Pim = 1;
+
+transition_SEIR_Im = [Ps, Pe, 0, (1/2)*(1-Pr), 0;
+                   1-Ps, 0, 0, 0, 0;
+                   0, 1/2*(1-Pe), (1-Pi), 0, 0;
+                   0, 1/2*(1-Pe), Pi, Pr, 0;
+                   0, 0, 0, (1/2)*(1-Pr), Pim];
+               
+fprintf('\n\n');
+fprintf('The transistion matrix for the Markov Chain of the SEIR-Im model:\n\n'); disp(transition_SEIR_Im); 
+
+% (c)
+%% 1
+
+%(a)
+susceptible_new = [1; 0; 0; 0; 0];
+days_3 = 1:1:250;
+prob_day_3 = zeros(4, 1);
+prob_s_3 = zeros(1, 31);
+prob_e_3 = zeros(1, 31);
+prob_i_3 = zeros(1, 250);
+prob_r_3 = zeros(1, 250);
+prob_im = zeros(1, 250);
+
+
+for n = 1:250
+    prob_day_3 = (transition_SEIR_Im ^ n) * susceptible_new;
+    prob_day_3 = prob_day_3 / sum(prob_day_3);
+    
+    prob_s_3(n) = prob_day_3(1);
+    prob_e_3(n) = prob_day_3(2);
+    prob_i_3(n) = prob_day_3(3);
+    prob_r_3(n) = prob_day_3(4);
+end
+
+figure(4);
+plot(days_3, 100*prob_s_3, '-g');
+hold on
+plot(days_3, 100*prob_e_3, '-r');
+plot(days_3, 100*prob_i_3, '-m');
+plot(days_3, 100*prob_r_3, '-b');
 legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
