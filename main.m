@@ -27,10 +27,10 @@ fprintf('The probability an exposed individual is in each state after one day is
 %% 4
 susceptible = [1; 0; 0; 0];
 
-probability_s = transition_SEIR * susceptible;
+probability_s = transition_SEIR ^ 5 * susceptible;
 
 fprintf('\n\n');
-fprintf('The probability a susceptible individual is in each state after one day is:\n\n'); disp(probability_s);
+fprintf('The probability a susceptible individual is in state R after 5 days is:\n\n'); disp(probability_s(4));
 
 %% 3.1 Questions
 
