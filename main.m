@@ -185,3 +185,5 @@ stat_dist_3(5) = prob_im(250);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);
+
+% commenty comment
