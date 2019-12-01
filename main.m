@@ -123,6 +123,9 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
 
 %% 4
 
+% lots of math: x_inf = c1v1... working on finding v and c
+
+
 %% 5
 
 % (b)
