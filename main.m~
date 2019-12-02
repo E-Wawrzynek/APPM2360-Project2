@@ -213,27 +213,7 @@ values = double(values);
 mult = zeros(1);
 multCount = 1;
 
-% initialize unique values matrix
-uniqueVals(1) = values(1);
-% fill an array with unique vaules
-for n = 1:length(values)
-    % if values is not already in matrix, put it in the matrix
-    
-    % loop through unique matrix, check if entries are the new value
-    for i = 1:length(uniqueVals)
-        if uniqueVals(i) ~= values(n);
-            uniqueVals(length(uniqueVals)+1) = values(n);
-        end
-    end
-    
-end
-
-
-% count everytime there is a repeated value
-
-
-
-
+%
 
 values1 = values(1);
 for q = 1:length(values)
