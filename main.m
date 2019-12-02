@@ -125,7 +125,55 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
 
 % lots of math: x_inf = c1v1... working on finding v and c
 
+[V, d] = eig(transition_SEIR);
 
+lambdas = [d(1); d(6); d(11); d(16)];
+eig_vec_i = V(1:4, 3);
+
+x0_1 = [1; 0; 0; 0];
+x0_2 = [0.15; 0.85; 0; 0];
+
+c_1 = V \ x0_1;
+c_2 = V \ x0_2;
+
+c_i = c_1(3);
+c_i_2 = c_2(3);
+
+disp('Checking that the constant c is the same for initial conditions:');
+disp('c_i:'); disp(c_i); disp('c_i_2'); disp(c_i_2);
+
+%eig_vec_i = eig_vec_i / sum(eig_vec_i);
+
+x_inf = c_i * eig_vec_i;
+disp(x_inf);
+
+abs_error = zeros(4, 31);
+days_4 = 1:1:31;
+prob_day_4 = zeros(4, 1);
+abs_err_s = zeros(1, 31);
+abs_err_e = zeros(1, 31);
+abs_err_i = zeros(1, 31);
+abs_err_r = zeros(1, 31);
+
+
+for n = 1:31
+    prob_day_4 = (transition_SEIR ^ n) * x0_2;
+    prob_day_4 = prob_day_4 / sum(prob_day_4);
+    
+    abs_error(1:4, n) = abs(x_inf - prob_day_4);
+    
+    abs_err_s(n) = abs_error(1, n);
+    abs_err_e(n) = abs_error(2, n);
+    abs_err_i(n) = abs_error(3, n);
+    abs_err_r(n) = abs_error(4, n);
+end
+
+figure(3);
+semilogy(days_4, 100*abs_err_s);
+hold on
+semilogy(days_4, 100*abs_err_e);
+semilogy(days_4, 100*abs_err_i);
+semilogy(days_4, 100*abs_err_r);
 %% 5
 
 % (b)
