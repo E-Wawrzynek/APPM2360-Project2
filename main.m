@@ -64,7 +64,6 @@ plot(days, 100*prob_r, '-b');
 legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
-xlim([1, 31]);
 ylabel('Probability');
     
 % (b)
@@ -108,7 +107,6 @@ plot(days, 100*prob_r_2, '-b');
 legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
-xlim([1, 31]);
 ylabel('Probability');
     
 % (b)
@@ -189,10 +187,6 @@ fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR-Im model:\n\n'); disp(transition_SEIR_Im); 
 
 % (c)
-
-%% 1
-
-%(a)
 susceptible_new = [1; 0; 0; 0; 0];
 days_3 = 1:1:250;
 prob_day_3 = zeros(5, 1);
@@ -224,10 +218,8 @@ plot(days_3, 100*prob_im, '-c');
 legend('susceptible', 'exposed', 'infected', 'recovered', 'immune');
 title('The Probability of being in a SEIR-Im state on each day');
 xlabel('Days (1-250)');
-%xlim([1, 250]);
 ylabel('Probability');
-    
-% (b)
+
 stat_dist_3 = zeros(5, 1);
 stat_dist_3(1) = prob_s_3(250);
 stat_dist_3(2) = prob_e_3(250);
@@ -237,8 +229,6 @@ stat_dist_3(5) = prob_im(250);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);
-
-
 %% 4.1 questions
 
 %% 1
@@ -279,101 +269,98 @@ fprintf('\n');
 fprintf('This is accounted for in the fact the last two columns of the tranisition matirx are independent from the first four.');
 
 %% 3
-
-suceptible_3 = [1; 0; 0; 0; 0; 0];
-prob_day_3 = zeros(6, 1);
-prob_s_3 = zeros(1, 31);
-prob_e_3 = zeros(1, 31);
-prob_i_3 = zeros(1, 31);
-prob_r_3 = zeros(1, 31);
-prob_v_3 = zeros(1, 31);
-prob_im_3 = zeros(1, 31);
+suceptible_5 = [1; 0; 0; 0; 0; 0];
+prob_day_5 = zeros(6, 1);
+prob_s_5 = zeros(1, 31);
+prob_e_5 = zeros(1, 31);
+prob_i_5 = zeros(1, 31);
+prob_r_5 = zeros(1, 31);
+prob_v_5 = zeros(1, 31);
+prob_im_5 = zeros(1, 31);
 
 
 for n = 1:31
-    prob_day_3 = (transition_SEIR_VIm ^ n) * suceptible_3;
-    prob_day_3 = prob_day_3 / sum(prob_day_3);
+    prob_day_5 = (transition_SEIR_VIm ^ n) * suceptible_5;
+    prob_day_5 = prob_day_5 / sum(prob_day_5);
     
-    prob_s_3(n) = prob_day_3(1);
-    prob_e_3(n) = prob_day_3(2);
-    prob_i_3(n) = prob_day_3(3);
-    prob_r_3(n) = prob_day_3(4);
-    prob_v_3(n) = prob_day_3(5);
-    prob_im_3(n) = prob_day_3(6);
+    prob_s_5(n) = prob_day_5(1);
+    prob_e_5(n) = prob_day_5(2);
+    prob_i_5(n) = prob_day_5(3);
+    prob_r_5(n) = prob_day_5(4);
+    prob_v_5(n) = prob_day_5(5);
+    prob_im_5(n) = prob_day_5(6);
 end
 
 figure(5);
-plot(days, 100*prob_s_3, '-g');
+plot(days, 100*prob_s_5, '-g');
 hold on
-plot(days, 100*prob_e_3, '-r');
-plot(days, 100*prob_i_3, '-m');
-plot(days, 100*prob_r_3, '-b');
-plot(days, 100*prob_v_3, '-c');
-plot(days, 100*prob_im_3, '--k');
+plot(days, 100*prob_e_5, '-r');
+plot(days, 100*prob_i_5, '-m');
+plot(days, 100*prob_r_5, '-b');
+plot(days, 100*prob_v_5, '-c');
+plot(days, 100*prob_im_5, '--k');
 legend('susceptible', 'exposed', 'infected', 'recovered', 'vaccinated','immune');
 title('The Probability of being in a SEIR-VIm state on each day');
 xlabel('Days (1-31)');
-xlim([1, 31]);
 ylabel('Probability');
 
 % stationary distribution
-stat_dist_3 = zeros(6, 1);
-stat_dist_3(1) = prob_s_3(31);
-stat_dist_3(2) = prob_e_3(31);
-stat_dist_3(3) = prob_i_3(31);
-stat_dist_3(4) = prob_r_3(31);
-stat_dist_3(5) = prob_v_3(31);
-stat_dist_3(6) = prob_im_3(31);
+stat_dist_5 = zeros(6, 1);
+stat_dist_5(1) = prob_s_5(31);
+stat_dist_5(2) = prob_e_5(31);
+stat_dist_5(3) = prob_i_5(31);
+stat_dist_5(4) = prob_r_5(31);
+stat_dist_5(5) = prob_v_5(31);
+stat_dist_5(6) = prob_im_5(31);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);
 
 %% 4
 
-suceptible_4 = [.33; 0; 0; 0; .67; 0];
-prob_day_4 = zeros(6, 1);
-prob_s_4 = zeros(1, 31);
-prob_e_4 = zeros(1, 31);
-prob_i_4 = zeros(1, 31);
-prob_r_4 = zeros(1, 31);
-prob_v_4 = zeros(1, 31);
-prob_im_4 = zeros(1, 31);
+suceptible_6 = [.33; 0; 0; 0; .67; 0];
+prob_day_6 = zeros(6, 1);
+prob_s_6 = zeros(1, 31);
+prob_e_6 = zeros(1, 31);
+prob_i_6 = zeros(1, 31);
+prob_r_6 = zeros(1, 31);
+prob_v_6 = zeros(1, 31);
+prob_im_6 = zeros(1, 31);
 
 
 for n = 1:31
-    prob_day_4 = (transition_SEIR_VIm ^ n) * suceptible_4;
-    prob_day_4 = prob_day_4 / sum(prob_day_4);
+    prob_day_6 = (transition_SEIR_VIm ^ n) * suceptible_6;
+    prob_day_6 = prob_day_6 / sum(prob_day_6);
     
-    prob_s_4(n) = prob_day_4(1);
-    prob_e_4(n) = prob_day_4(2);
-    prob_i_4(n) = prob_day_4(3);
-    prob_r_4(n) = prob_day_4(4);
-    prob_v_4(n) = prob_day_4(5);
-    prob_im_4(n) = prob_day_4(6);
+    prob_s_6(n) = prob_day_6(1);
+    prob_e_6(n) = prob_day_6(2);
+    prob_i_6(n) = prob_day_6(3);
+    prob_r_6(n) = prob_day_6(4);
+    prob_v_6(n) = prob_day_6(5);
+    prob_im_6(n) = prob_day_6(6);
 end
 
 figure(6);
-plot(days, 100*prob_s_4, '-g');
+plot(days, 100*prob_s_6, '-g');
 hold on
-plot(days, 100*prob_e_4, '-r');
-plot(days, 100*prob_i_4, '-m');
-plot(days, 100*prob_r_4, '-b');
-plot(days, 100*prob_v_4, '-c');
-plot(days, 100*prob_im_4, '-k');
+plot(days, 100*prob_e_6, '-r');
+plot(days, 100*prob_i_6, '-m');
+plot(days, 100*prob_r_6, '-b');
+plot(days, 100*prob_v_6, '-c');
+plot(days, 100*prob_im_6, '-k');
 legend('susceptible', 'exposed', 'infected', 'recovered', 'vaccinated','immune');
 title('The Probability of being in a SEIR-VIm state on each day');
 xlabel('Days (1-31)');
-xlim([1, 31]);
 ylabel('Probability');
 
 % stationary distribution
-stat_dist_4 = zeros(6, 1);
-stat_dist_4(1) = prob_s_4(31);
-stat_dist_4(2) = prob_e_4(31);
-stat_dist_4(3) = prob_i_4(31);
-stat_dist_4(4) = prob_r_4(31);
-stat_dist_4(5) = prob_v_4(31);
-stat_dist_4(6) = prob_im_4(31);
+stat_dist_6 = zeros(6, 1);
+stat_dist_6(1) = prob_s_6(31);
+stat_dist_6(2) = prob_e_6(31);
+stat_dist_6(3) = prob_i_6(31);
+stat_dist_6(4) = prob_r_6(31);
+stat_dist_6(5) = prob_v_6(31);
+stat_dist_6(6) = prob_im_6(31);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_4);
