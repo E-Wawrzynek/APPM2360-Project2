@@ -189,6 +189,7 @@ fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR-Im model:\n\n'); disp(transition_SEIR_Im); 
 
 % (c)
+
 %% 1
 
 %(a)
