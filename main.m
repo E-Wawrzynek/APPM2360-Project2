@@ -1,7 +1,8 @@
 %% APPM 2360 Project 2
 
 %% 2.1 Questions
-
+close all
+clear all
 %% 2
 Ps = 0.7;
 Pe = 0.4;
@@ -172,6 +173,9 @@ hold on
 semilogy(days_4, 100*abs_err_e);
 semilogy(days_4, 100*abs_err_i);
 semilogy(days_4, 100*abs_err_r);
+title('Absolute Error for each step');
+xlabel('days');
+ylabel('error (log scale)');
 %% 5
 
 % (b)
@@ -363,7 +367,7 @@ stat_dist_6(5) = prob_v_6(31);
 stat_dist_6(6) = prob_im_6(31);
 
 fprintf('\n\n');
-fprintf('The stationary distribution is:\n\n'); disp(stat_dist_4);
+fprintf('The stationary distribution is:\n\n'); disp(stat_dist_6);
 
 
 %% 5
