@@ -3,6 +3,7 @@
 %% 2.1 Questions
 close all
 clear all
+
 %% 2
 Ps = 0.7;
 Pe = 0.4;
@@ -65,7 +66,7 @@ plot(days, 100*prob_r, '-b');
 legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
-ylabel('Probability');
+ylabel('Probability (percentage)');
     
 % (b)
 stat_dist = zeros(4, 1);
@@ -108,7 +109,7 @@ plot(days, 100*prob_r_2, '-b');
 legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
-ylabel('Probability');
+ylabel('Probability (percentage)');
     
 % (b)
 stat_dist_2 = zeros(4, 1);
@@ -222,7 +223,7 @@ plot(days_3, 100*prob_im, '-c');
 legend('susceptible', 'exposed', 'infected', 'recovered', 'immune');
 title('The Probability of being in a SEIR-Im state on each day');
 xlabel('Days (1-250)');
-ylabel('Probability');
+ylabel('Probability (percentage)');
 
 stat_dist_3 = zeros(5, 1);
 stat_dist_3(1) = prob_s_3(250);
@@ -246,9 +247,6 @@ transition_SEIR_VIm = [.7 0 0 .2 0 0;
 
 fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR-VIm model:\n\n'); disp(transition_SEIR_VIm);
-
-
-
 
 %% 2
 syms x;
@@ -306,7 +304,7 @@ plot(days, 100*prob_im_5, '--k');
 legend('susceptible', 'exposed', 'infected', 'recovered', 'vaccinated','immune');
 title('The Probability of being in a SEIR-VIm state on each day');
 xlabel('Days (1-31)');
-ylabel('Probability');
+ylabel('Probability (percentage)');
 
 % stationary distribution
 stat_dist_5 = zeros(6, 1);
