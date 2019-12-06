@@ -123,7 +123,7 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
 
 %% 4
 
-% lots of math: x_inf = c1v1... working on finding v and c
+% lots of math: x_inf = c1v1...
 
 [V, d] = eig(transition_SEIR);
 
@@ -174,9 +174,10 @@ hold on
 semilogy(days_4, 100*abs_err_e);
 semilogy(days_4, 100*abs_err_i);
 semilogy(days_4, 100*abs_err_r);
-title('Absolute Error for each step');
-xlabel('days');
-ylabel('error (log scale)');
+legend('Error Susceptability', 'Error Exposure', 'Error Infection', 'Error Recovered');
+title('Absolute Error for Each Step');
+xlabel('days (1-31)');
+ylabel('absolute error (log scale)');
 %% 5
 
 % (b)
@@ -238,26 +239,40 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);
 
 %% 1
 
-transition_SEIR_VIm = [.7 0 0 .2 0 0; 
-    .3 0 0 0 0 0;
-    0 .5 0 0 0 0; 
-    0 .5 1 .8 0 0;
-    0 0 0 0 .25 0;
-    0 0 0 0 .75 1];
+Pex = 0.5;
+Pv = 0.25;
+Pimu = 1;
+
+transition_SEIR_VIm = [Ps, 0, 0, 1-Pr, 0, 0; 
+                       1-Ps, 0, 0, 0, 0, 0;
+                       0, Pex, 0, 0, 0, 0; 
+                       0, Pex, Pim, Pr, 0, 0;
+                       0, 0, 0, 0,  Pv, 0;
+                       0, 0, 0, 0, 1-Pv, Pimu];
 
 fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR-VIm model:\n\n'); disp(transition_SEIR_VIm);
 
 %% 2
-syms x;
-mat1 = transition_SEIR_VIm - x*eye(6);
-eqn = det(mat1) == 0;
-values = solve(eqn);
-values = double(values);
+% syms x;
+% mat1 = transition_SEIR_VIm - x*eye(6);
+% eqn = det(mat1) == 0;
+% values = solve(eqn);
+% values = double(values);
+% 
+% mult1 = 0;
+% for i = 1:6
+%     if values(i) == 1
+%         mult1 = mult1 + 1;
+%     end
+% end
 
+[Vnew, dnew] = eig(transition_SEIR_VIm);
+
+lambdasnew = [dnew(1); dnew(8); dnew(15); dnew(22); dnew(29); dnew(36)];
 mult1 = 0;
-for i = 1:6
-    if values(i) == 1
+for n = 1:6
+    if lambdasnew(n) == 1
         mult1 = mult1 + 1;
     end
 end
@@ -369,7 +384,6 @@ fprintf('The stationary distribution is:\n\n'); disp(stat_dist_6);
 
 
 %% 5
-
 fprintf('\n\n');
 fprintf('In order for the stationary distribution to have any values for vaccinated or immune, the initial state vector has to contaion values for these two categories.');
 fprintf('\n\n');
