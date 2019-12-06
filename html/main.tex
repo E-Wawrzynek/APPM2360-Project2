@@ -1,10 +1,55 @@
-%% APPM 2360 Project 2
 
-%% 2.1 Questions
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    
+\section*{APPM 2360 Project 2}
+
+
+\subsection*{Contents}
+
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item 2.1 Questions
+   \item 2
+   \item 3
+   \item 4
+   \item 3.1 Questions
+   \item 1
+   \item 2
+   \item 4
+   \item 5
+   \item 4.1 questions
+   \item 1
+   \item 2
+   \item 3
+   \item 4
+   \item 5
+\end{itemize}
+
+
+\subsection*{2.1 Questions}
+
+\begin{verbatim}
 close all
 clear all
+\end{verbatim}
 
-%% 2
+
+\subsection*{2}
+
+\begin{verbatim}
 Ps = 0.7;
 Pe = 0.4;
 Pi = 1;
@@ -17,27 +62,70 @@ transition_SEIR = [Ps, Pe, 0, 1-Pr;
 
 fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR model:\n\n'); disp(transition_SEIR);
+\end{verbatim}
 
-%% 3
+        \color{lightgray} \begin{verbatim}
+
+The transistion matrix for the Markov Chain of the SEIR model:
+
+    0.7000    0.4000         0    0.2000
+    0.3000         0         0         0
+         0    0.3000         0         0
+         0    0.3000    1.0000    0.8000
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{3}
+
+\begin{verbatim}
 exposed = [0; 1; 0; 0];
 
 probability_e = transition_SEIR * exposed;
 
 fprintf('\n\n');
 fprintf('The probability an exposed individual is in each state after one day is:\n\n'); disp(probability_e);
+\end{verbatim}
 
-%% 4
+        \color{lightgray} \begin{verbatim}
+
+The probability an exposed individual is in each state after one day is:
+
+    0.4000
+         0
+    0.3000
+    0.3000
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{4}
+
+\begin{verbatim}
 susceptible = [1; 0; 0; 0];
 
 probability_s = transition_SEIR ^ 5 * susceptible;
 
 fprintf('\n\n');
 fprintf('The probability a susceptible individual is in state R after 5 days is:\n\n'); disp(probability_s(4));
+\end{verbatim}
 
-%% 3.1 Questions
+        \color{lightgray} \begin{verbatim}
 
-%% 1
+The probability a susceptible individual is in state R after 5 days is:
 
+    0.3408
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{3.1 Questions}
+
+
+
+\subsection*{1}
+
+\begin{verbatim}
 %(a)
 days = 1:1:31;
 prob_day = zeros(4, 1);
@@ -50,7 +138,7 @@ prob_r = zeros(1, 31);
 for n = 1:31
     prob_day = (transition_SEIR ^ n) * susceptible;
     prob_day = prob_day / sum(prob_day);
-    
+
     prob_s(n) = prob_day(1);
     prob_e(n) = prob_day(2);
     prob_i(n) = prob_day(3);
@@ -67,7 +155,7 @@ legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
 ylabel('Probability (percentage)');
-    
+
 % (b)
 stat_dist = zeros(4, 1);
 stat_dist(1) = prob_s(31);
@@ -77,9 +165,25 @@ stat_dist(4) = prob_r(31);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
+\end{verbatim}
 
-%% 2
+        \color{lightgray} \begin{verbatim}
 
+The stationary distribution is:
+
+    0.4367
+    0.1310
+    0.0393
+    0.3930
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{main_01.eps}
+
+
+\subsection*{2}
+
+\begin{verbatim}
 %(a)
 susceptible_2 = [0.15; 0.85; 0; 0];
 days_2 = 1:1:31;
@@ -93,7 +197,7 @@ prob_r_2 = zeros(1, 31);
 for n = 1:31
     prob_day_2 = (transition_SEIR ^ n) * susceptible_2;
     prob_day_2 = prob_day_2 / sum(prob_day_2);
-    
+
     prob_s_2(n) = prob_day_2(1);
     prob_e_2(n) = prob_day_2(2);
     prob_i_2(n) = prob_day_2(3);
@@ -110,7 +214,7 @@ legend('susceptible', 'exposed', 'infected', 'recovered');
 title('The Probability of being in a SEIR state on each day');
 xlabel('Days (1-31)');
 ylabel('Probability (percentage)');
-    
+
 % (b)
 stat_dist_2 = zeros(4, 1);
 stat_dist_2(1) = prob_s_2(31);
@@ -120,9 +224,25 @@ stat_dist_2(4) = prob_r_2(31);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist);
+\end{verbatim}
 
-%% 4
+        \color{lightgray} \begin{verbatim}
 
+The stationary distribution is:
+
+    0.4367
+    0.1310
+    0.0393
+    0.3930
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{main_02.eps}
+
+
+\subsection*{4}
+
+\begin{verbatim}
 % lots of math: x_inf = c1v1...
 
 [V, d] = eig(transition_SEIR);
@@ -159,9 +279,9 @@ abs_err_r = zeros(1, 31);
 for n = 1:31
     prob_day_4 = (transition_SEIR ^ n) * x0_2;
     prob_day_4 = prob_day_4 / sum(prob_day_4);
-    
+
     abs_error(1:4, n) = abs(x_inf - prob_day_4);
-    
+
     abs_err_s(n) = abs_error(1, n);
     abs_err_e(n) = abs_error(2, n);
     abs_err_i(n) = abs_error(3, n);
@@ -178,8 +298,28 @@ legend('Error Susceptability', 'Error Exposure', 'Error Infection', 'Error Recov
 title('Absolute Error for Each Step');
 xlabel('days (1-31)');
 ylabel('absolute error (log scale)');
-%% 5
+\end{verbatim}
 
+        \color{lightgray} \begin{verbatim}Checking that the constant c is the same for initial conditions:
+c_i:
+    0.6032
+
+c_i_2
+    0.6032
+
+    0.4367
+    0.1310
+    0.0393
+    0.3930
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{main_03.eps}
+
+
+\subsection*{5}
+
+\begin{verbatim}
 % (b)
 Pim = 1;
 
@@ -188,9 +328,9 @@ transition_SEIR_Im = [Ps, Pe, 0, (1/2)*(1-Pr), 0;
                    0, 1/2*(1-Pe), (1-Pi), 0, 0;
                    0, 1/2*(1-Pe), Pi, Pr, 0;
                    0, 0, 0, (1/2)*(1-Pr), Pim];
-               
+
 fprintf('\n\n');
-fprintf('The transistion matrix for the Markov Chain of the SEIR-Im model:\n\n'); disp(transition_SEIR_Im); 
+fprintf('The transistion matrix for the Markov Chain of the SEIR-Im model:\n\n'); disp(transition_SEIR_Im);
 
 % (c)
 susceptible_new = [1; 0; 0; 0; 0];
@@ -206,7 +346,7 @@ prob_im = zeros(1, 250);
 for n = 1:250
     prob_day_3 = (transition_SEIR_Im ^ n) * susceptible_new;
     prob_day_3 = prob_day_3 / sum(prob_day_3);
-    
+
     prob_s_3(n) = prob_day_3(1);
     prob_e_3(n) = prob_day_3(2);
     prob_i_3(n) = prob_day_3(3);
@@ -235,41 +375,81 @@ stat_dist_3(5) = prob_im(250);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);
-%% 4.1 questions
+\end{verbatim}
 
-%% 1
+        \color{lightgray} \begin{verbatim}
 
+The transistion matrix for the Markov Chain of the SEIR-Im model:
+
+    0.7000    0.4000         0    0.1000         0
+    0.3000         0         0         0         0
+         0    0.3000         0         0         0
+         0    0.3000    1.0000    0.8000         0
+         0         0         0    0.1000    1.0000
+
+
+
+The stationary distribution is:
+
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    1.0000
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{main_04.eps}
+
+
+\subsection*{4.1 questions}
+
+
+
+\subsection*{1}
+
+\begin{verbatim}
 Pex = 0.5;
 Pv = 0.25;
 Pimu = 1;
 
-transition_SEIR_VIm = [Ps, 0, 0, 1-Pr, 0, 0; 
+transition_SEIR_VIm = [Ps, 0, 0, 1-Pr, 0, 0;
                        1-Ps, 0, 0, 0, 0, 0;
-                       0, Pex, 0, 0, 0, 0; 
+                       0, Pex, 0, 0, 0, 0;
                        0, Pex, Pim, Pr, 0, 0;
                        0, 0, 0, 0,  Pv, 0;
                        0, 0, 0, 0, 1-Pv, Pimu];
 
 fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR-VIm model:\n\n'); disp(transition_SEIR_VIm);
+\end{verbatim}
 
-%% 2
-% syms x;
-% mat1 = transition_SEIR_VIm - x*eye(6);
-% eqn = det(mat1) == 0;
-% values = solve(eqn);
-% values = double(values);
-% 
-% mult1 = 0;
-% for i = 1:6
-%     if values(i) == 1
-%         mult1 = mult1 + 1;
-%     end
-% end
+        \color{lightgray} \begin{verbatim}
 
+The transistion matrix for the Markov Chain of the SEIR-VIm model:
+
+    0.7000         0         0    0.2000         0         0
+    0.3000         0         0         0         0         0
+         0    0.5000         0         0         0         0
+         0    0.5000    1.0000    0.8000         0         0
+         0         0         0         0    0.2500         0
+         0         0         0         0    0.7500    1.0000
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{2}
+
+\begin{verbatim}
 [Vnew, dnew] = eig(transition_SEIR_VIm);
 
 lambdasnew = [dnew(1); dnew(8); dnew(15); dnew(22); dnew(29); dnew(36)];
+mult1 = 0;
+for n = 1:6
+    if lambdasnew(n) == 1
+        mult1 = mult1 + 1;
+    end
+end
 
 fprintf('\n\n');
 fprintf('The eigenvalue 1 has multiplicity of:'); disp(mult1);
@@ -278,8 +458,20 @@ fprintf('This implies that there are two unique stationary distributions.');
 fprintf('\n');
 % not craystal clear on the 'structural features they are talking about'
 fprintf('This is accounted for in the fact the last two columns of the tranisition matirx are independent from the first four.');
+\end{verbatim}
 
-%% 3
+        \color{lightgray} \begin{verbatim}
+
+The eigenvalue 1 has multiplicity of:     2
+
+
+This implies that there are two unique stationary distributions.
+This is accounted for in the fact the last two columns of the tranisition matirx are independent from the first four.\end{verbatim} \color{black}
+    
+
+\subsection*{3}
+
+\begin{verbatim}
 suceptible_5 = [1; 0; 0; 0; 0; 0];
 prob_day_5 = zeros(6, 1);
 prob_s_5 = zeros(1, 31);
@@ -293,7 +485,7 @@ prob_im_5 = zeros(1, 31);
 for n = 1:31
     prob_day_5 = (transition_SEIR_VIm ^ n) * suceptible_5;
     prob_day_5 = prob_day_5 / sum(prob_day_5);
-    
+
     prob_s_5(n) = prob_day_5(1);
     prob_e_5(n) = prob_day_5(2);
     prob_i_5(n) = prob_day_5(3);
@@ -326,9 +518,26 @@ stat_dist_5(6) = prob_im_5(31);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_3);
+\end{verbatim}
 
-%% 4
+        \color{lightgray} \begin{verbatim}
 
+The stationary distribution is:
+
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    1.0000
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{main_05.eps}
+
+
+\subsection*{4}
+
+\begin{verbatim}
 suceptible_6 = [.33; 0; 0; 0; .67; 0];
 prob_day_6 = zeros(6, 1);
 prob_s_6 = zeros(1, 31);
@@ -342,7 +551,7 @@ prob_im_6 = zeros(1, 31);
 for n = 1:31
     prob_day_6 = (transition_SEIR_VIm ^ n) * suceptible_6;
     prob_day_6 = prob_day_6 / sum(prob_day_6);
-    
+
     prob_s_6(n) = prob_day_6(1);
     prob_e_6(n) = prob_day_6(2);
     prob_i_6(n) = prob_day_6(3);
@@ -375,9 +584,27 @@ stat_dist_6(6) = prob_im_6(31);
 
 fprintf('\n\n');
 fprintf('The stationary distribution is:\n\n'); disp(stat_dist_6);
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}
+
+The stationary distribution is:
+
+    0.1119
+    0.0336
+    0.0168
+    0.1678
+    0.0000
+    0.6700
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{main_06.eps}
 
 
-%% 5
+\subsection*{5}
+
+\begin{verbatim}
 fprintf('\n\n');
 fprintf('In order for the stationary distribution to have any values for vaccinated or immune, the initial state vector has to contaion values for these two categories.');
 fprintf('\n\n');
@@ -385,4 +612,17 @@ fprintf('In problem 3, there were no non zero initial conditions for vaccinated 
 fprintf('\n\n');
 % can only think of the same 'structural feasture' as before...
 fprintf('This is accounted for by the fact that the last two columns of the trasition matix do not depend on the first four.');
+\end{verbatim}
 
+        \color{lightgray} \begin{verbatim}
+
+In order for the stationary distribution to have any values for vaccinated or immune, the initial state vector has to contaion values for these two categories.
+
+In problem 3, there were no non zero initial conditions for vaccinated or immune and therefore, the stationary state graph only had sero values for these two states.
+
+This is accounted for by the fact that the last two columns of the trasition matix do not depend on the first four.\end{verbatim} \color{black}
+    
+
+
+\end{document}
+    
