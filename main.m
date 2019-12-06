@@ -254,18 +254,6 @@ fprintf('\n\n');
 fprintf('The transistion matrix for the Markov Chain of the SEIR-VIm model:\n\n'); disp(transition_SEIR_VIm);
 
 %% 2
-% syms x;
-% mat1 = transition_SEIR_VIm - x*eye(6);
-% eqn = det(mat1) == 0;
-% values = solve(eqn);
-% values = double(values);
-% 
-% mult1 = 0;
-% for i = 1:6
-%     if values(i) == 1
-%         mult1 = mult1 + 1;
-%     end
-% end
 
 [Vnew, dnew] = eig(transition_SEIR_VIm);
 
